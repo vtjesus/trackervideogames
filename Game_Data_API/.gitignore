@@ -1,0 +1,6 @@
+logo/
+banner/
+cover/
+venv/
+.env
+__pycache__

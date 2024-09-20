@@ -1,0 +1,65 @@
+<!-- BG-BLUR -->
+<img *ngIf="game" [src]="'public/blur/' + game.img + '.jpg'" class="fixed top-0 left-0 h-screen min-w-full object-cover opacity-30 dark:opacity-40" alt=""/>
+
+<!-- NAVBAR FOR MOBILE -->
+<nav class="absolute top-2 left-2 z-10 lg:hidden">
+  <label
+    for="my-drawer-2"
+    (click)="scrollToSelectedGame()"
+    class="btn btn-square drawer-button lg:hidden">
+    <fa-icon class="text-2xl text-primary" [icon]="faBars"></fa-icon>
+  </label>
+</nav>
+
+<div class="drawer lg:drawer-open w-full">
+  <input id="my-drawer-2" type="checkbox" class="drawer-toggle w-0" />
+
+  <!-- HACK: tab navigation focuses on tabindex="0" & vimium focuses on <a> -->
+  <div class="drawer-content" tabindex="0">
+    <a><router-outlet></router-outlet></a>
+  </div>
+
+  <div class="drawer-side">
+    <!-- toggle sidebar button on overlay -->
+    <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay">
+    </label>
+    <ul *ngIf="game" class="menu p-0 bg-base-300 lg:bg-transparent text-base-content min-h-full w-[28rem]">
+      <!-- BG-BLUR TO HIDE TEXT SCROLLING UNDERNEATH IT -->
+      <nav class="navbar gap-4 sticky top-0 lg:bg-transparent lg:backdrop-blur-xl bg-base-300 w-full z-10">
+        <div class="flex-none lg:hidden"> <!-- Drawer Toggle (Mobile Exclusive) -->
+          <label for="my-drawer-2" class="btn btn-square btn-ghost drawer-button lg:hidden">
+            <fa-icon class="text-2xl text-primary" [icon]="faBars"></fa-icon>
+          </label>
+        </div>
+        <button
+          class="hidden lg:block"
+          onclick="history.back()">
+          <fa-icon class="text-2xl px-4 py-3 rounded-lg text-primary hover:bg-primary hover:text-white transition" [icon]="faBack"></fa-icon>
+        </button> <!-- History Button (PC Exclusive) -->
+        <div class="text-2xl font-extrabold">All Games</div>
+      </nav>
+      <!-- SIDEBAR CONTENT -->
+      <li *ngFor="let gameItem of games">
+        <a
+          (click)="viewDetails(gameItem)"
+          [id]="game.id === gameItem.id ? 'selected-game' : null"
+          [ngClass]="{'bg-neutral-500/40 hover:bg-neutral-500/40': game.id === gameItem.id}"
+          class="text-lg truncate py-3 px-8 hover:bg-base-100/20">
+          <img
+            class="object-contain w-8 rounded-lg font-black truncate"
+            loading="lazy"
+            [ngSrc]="'public/icon/' + gameItem.img + '.png'"
+            alt="{{ gameItem.img }}"
+            height="64"
+            width="64"
+          />
+          <!-- Mobile Exclusive Autohide Drawer on Name Click -->
+          <label for="my-drawer-2" class="block lg:hidden">
+            <span>{{ gameItem.name }}</span>
+          </label>
+          <span class="hidden lg:block">{{ gameItem.name }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

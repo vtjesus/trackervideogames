@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ▀█▀ █░█ █▀▀ █▀▄▀█ █▀▀ █▀ */
+/* ░█░ █▀█ ██▄ █░▀░█ ██▄ ▄█ */
+
+:root {
+  --foreground: #1a1a1a;
+  --background: #e6e6e6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground: #e6e6e6;
+    --background: #1a1a1a;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+/* ▀█▀ ▄▀█ █▀▀ █▀ */
+/* ░█░ █▀█ █▄█ ▄█ */
+
+h1 {
+  @apply text-5xl font-extrabold dark:text-white;
+}
+h2 {
+  @apply text-4xl font-bold dark:text-white;
+}
+h3 {
+  @apply text-3xl font-bold dark:text-white;
+}
+h4 {
+  @apply text-2xl font-bold dark:text-white;
+}
+h5 {
+  @apply text-xl font-bold dark:text-white;
+}
+h6 {
+  @apply text-lg font-bold dark:text-white;
+}
+p {
+  @apply mb-3 text-gray-800 dark:text-gray-200;
+}

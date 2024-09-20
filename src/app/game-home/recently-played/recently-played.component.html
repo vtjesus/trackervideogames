@@ -1,0 +1,39 @@
+<section id="recentlyPlayed" class="container mx-auto py-8 px-2">
+  <h2 class="card font-black my-8">Recently Played</h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-4 lg:gap-8">
+    <article
+      class="card relative cursor-pointer group overflow-hidden"
+      *ngFor="let game of recentlyPlayed"
+      (click)="viewDetails(game)"
+      (keydown.enter)="viewDetails(game)"
+      (keydown.space)="viewDetails(game)"
+      tabindex="0"
+      role="button"
+    >
+      <p class="absolute text-serial text-gray-300 font-black m-4 z-10">{{ game.id }}</p>
+      <!-- BG CARD IMAGE -->
+      <img
+        class="object-cover rounded-lg transition duration-500 group-hover:scale-105"
+        loading="lazy"
+        [src]="'public/banner/' + game.img + '.jpg'"
+        alt="{{ game.name }}"
+      />
+
+      <div class="absolute flex gap-4 p-4 bottom-0 bg-gradient-to-t from-black to-transparent">
+        <!-- LEFT COVER -->
+        <img
+          class="object-cover w-24 rounded-lg"
+          loading="lazy"
+          [src]="'public/cover/' + game.img + '.jpg'"
+          alt="{{ game.name }}"
+        />
+        <!-- RIGHT DETAILS -->
+        <div class="object-contain">
+          <h2 class="text-white text-2xl sm:text-3xl lg:text-4xl">{{ game.name }}</h2>
+          <p class="text-white font-bold text-lg">{{ game.year }}</p>
+          <p class="text-white line-clamp-2">{{ game.description }}</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
